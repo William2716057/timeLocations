@@ -1,6 +1,6 @@
 const readline = require("readline");
 
-// continue adding
+// List of time zones to check
 const timeZones = [
     "UTC", "America/New_York", "America/Chicago", "America/Denver", "America/Los_Angeles",
     "Europe/London", "Europe/Paris", "Europe/Berlin", "Asia/Tokyo", "Asia/Shanghai",
@@ -16,7 +16,7 @@ const rl = readline.createInterface({
 // Return locations matching only the hour, ignoring minutes
 function getLocations(inputTime) {
     let matchingLocations = [];
-    let inputHour = inputTime.split(":")[0]; // for approximate hour
+    let inputHour = inputTime.split(":")[0]; // Extracts HH part
 
     timeZones.forEach(tz => {
         let formattedTime = new Intl.DateTimeFormat("en-US", {
@@ -43,7 +43,7 @@ rl.question("Enter time (HH:MM, 24h format): ", (time) => {
     const locations = getLocations(time);
 
     if (locations.length > 0) {
-        console.log(`It is currently around ${time} or later in these locations:`);
+        console.log(`It is currently around ${time} in these locations:`);
         console.log(locations.join(", "));
     } else {
         console.log(`No locations found for ${time}.`);
