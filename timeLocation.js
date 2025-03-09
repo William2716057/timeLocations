@@ -1,26 +1,12 @@
+const readline = require('readline');
 
-//enter time
-//where time Intl.DateTimeFormat
-
-//function getLocations(time)
-
-//const time = prompt("Please enter time: ")
-
-//function displayLocation() {
-
-//while Intl.DateTimeFormat = time
-//let locations = 
-
-//console.log("It is currently ${time} in these locations")
-
-//}
-
-//let time = prompt("Please enter time: ")
-
-//displayLocation(time)
+const rl = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout
+});
 
 function getLocations(time) {
-	const timeZones - Intl.supportedValuesOf("timezone");
+	const timeZones = Intl.supportedValuesOf("timezone");
 	let matchingLocations = [];
 
 	timeZones.forEach(tz => {
@@ -30,7 +16,7 @@ function getLocations(time) {
 			minute: '2-digit',
 			hour12: false
 		}).format(new Date());
-		
+
 		if (formattedTime === time) {
 			matchingLocations.push(tz);
 		}
@@ -39,9 +25,15 @@ function getLocations(time) {
 	return matchingLocations;
 }
 
-const time = prompt("Enter time: (HH:MM, 24h)");
+//const time = prompt("Enter time: (HH:MM, 24h)");
+rl.question("Enter time: (HH:MM, 24h)", (time)=> {
+	const locations = getLocations(time);
 
-const locations = getLocations(time):
-
-
-
+	if (locations.length > 0) {
+		console('Locations where time = ${time} ')
+		console.log(locations.join(", "));
+	} else {
+		console.log("No locations found");
+	}
+	rl.close();
+});
